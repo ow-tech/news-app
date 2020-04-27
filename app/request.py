@@ -14,10 +14,8 @@ api_key = app.config['NEWS_API_KEY']
 base_url = app.config["SOURCE_BASE_URL"]
 
 
-# def configure_request(app):
-#     global api_key, base_url
-#     api_key = app.config['NEWS_API_KEY']
-#     base_url = app.config['SOURCE_BASE_URL']
+#Getting Everything base url for articles
+articles_url = app.config['EVERYTHING_SOURCE_BASE_URL']
 
 
 def get_sources(category):
@@ -69,4 +67,10 @@ def process_results(source_list):
 
 
 def get_articles(source_id, limit):
-    get_article_location_url = articles_url
+    get_article_location_url = articles_url.format(source_id, limit, api_key)
+
+    with urllib.request.get(get_article_location_url) as url:
+        get_article_data = url.read()
+        get_article_responce = json.loads(get_article_data)
+
+        articles_results = None
