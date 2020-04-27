@@ -66,3 +66,7 @@ def process_results(source_list):
             source_results. append(source_object)
 
     return source_results
+
+
+def get_articles(source_id, limit):
+    get_article_location_url = articles_url
