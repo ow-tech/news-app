@@ -1,7 +1,7 @@
 from app import app
 import urllib.request
 import json
-from .models import source
+from .models import source, articles
 
 
 Source = source.Source
@@ -69,8 +69,32 @@ def process_results(source_list):
 def get_articles(source_id, limit):
     get_article_location_url = articles_url.format(source_id, limit, api_key)
 
-    with urllib.request.get(get_article_location_url) as url:
+    with urllib.request.urlopen(get_article_location_url) as url:
         get_article_data = url.read()
-        get_article_responce = json.loads(get_article_data)
+        get_article_response = json.loads(get_article_data)
 
         articles_results = None
+
+        if get_article_response['articles']:
+            articles_results_list = get_article_response['articles']
+
+            articles_results = process_articles(articles_results_list )
+
+    return articles_results
+
+def process_articles(obtained_articles):
+    article_location_list = []
+
+    for article in obtained_articles:
+        author: article.get('author')
+        title = article.get('title')
+        description = article.get('description')
+        url = article.get('url')
+        urlToImage = article.get('urlToImage')
+
+        if urlToImage:
+            article_source_object = Articles(author, title, description, url, urlToImage)
+            article_location_list.append(article_source_object)
+
+    return article_location_list
+
