@@ -22,3 +22,10 @@ def index():
 
 
     return render_template('index.html', General= general_news, Business = business_news, Entertainment = entertainment_news, Sports = sports_news, Technology = technology_news, Science = science_news, Health = health_news)
+@app.route('/articles/<source_id>')
+def articles(source_id):
+
+    source_id = get_articles(source_id)
+    title = f'{source_id} | All Articles'
+
+    return render_template('articles.html', name= source_id, title = title)

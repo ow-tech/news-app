@@ -18,6 +18,7 @@ base_url = app.config["SOURCE_BASE_URL"]
 articles_url = app.config['EVERYTHING_SOURCE_BASE_URL']
 
 
+
 def get_sources(category):
     """
     function that gets the sources

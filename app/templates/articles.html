@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class ="containner-fluid">
+    <div class="row">
+        <div class ="col-md-12 heading">
+            <h2>{{name}}</h2>
+
+        </div>
+
+    </div>
+
+    <div class = "row">
+        {% for article in news %}
+        <div class ="col-sm-6">
+            <h4> {{article.title}} </h4>
+            <span class="text-muted date-author">{{article.publishedAt}}</span>
+            <img src ={{article.urlToImage}}>
+            <button type="button" class="btn btn-primary btn-sm"><a href ={{article.url}} target="_blank"></a>Continue Reading</button>
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}
+
