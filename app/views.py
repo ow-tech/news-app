@@ -1,5 +1,6 @@
 from flask import render_template
 from app import app
+from .request import get_sources
 
 
 #views
@@ -19,4 +20,4 @@ def index():
     health_news = get_sources('health')
 
 
-    return render_template('index.html', General=general_news, Business=business_news, Entertainment=entertainment_news, Sports=sports_news, Technology=technology_news, Science=science_news, Health=health_news)
+    return render_template('index.html', General= general_news, Business = business_news, Entertainment = entertainment_news, Sports = sports_news, Technology = technology_news, Science = science_news, Health = health_news)

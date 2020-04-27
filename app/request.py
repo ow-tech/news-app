@@ -1,5 +1,6 @@
 from app import app
-import urllib.request, json
+import urllib.request
+import json
 from .models import source
 
 
@@ -13,6 +14,12 @@ api_key = app.config['NEWS_API_KEY']
 base_url = app.config["SOURCE_BASE_URL"]
 
 
+# def configure_request(app):
+#     global api_key, base_url
+#     api_key = app.config['NEWS_API_KEY']
+#     base_url = app.config['SOURCE_BASE_URL']
+
+
 def get_sources(category):
     """
     function that gets the sources
@@ -20,12 +27,14 @@ def get_sources(category):
 
     get_source_url = base_url.format(category, api_key)
 
-
     with urllib.request.urlopen(get_source_url) as url:
-        get_source_data = url.read
+        get_source_data = url.read()
         get_source_response = json.loads(get_source_data)
 
-            if get_source_response['sources']:
+
+        sources_results = None
+
+        if get_source_response['sources']:
             sources_results_list = get_source_response['sources']
             sources_results = process_results(sources_results_list)
 
