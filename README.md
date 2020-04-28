@@ -53,7 +53,7 @@ You need the following to start working on the project on your local computer:
 
 * Once started, the project can be accessed on your localhost using the address: ``` localhost:5000 ```.
 
-* Alternatively the application can be accessed by visiting ....
+* Alternatively the application can be accessed by visiting ....https://newsapp-source-articles.herokuapp.com/
 
 ## Technologies Used
 
