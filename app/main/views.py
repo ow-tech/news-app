@@ -26,7 +26,7 @@ def index():
 @main.route('/articles/<source_id>')
 def articles(source_id):
 
-    source_id = get_articles(source_id)
+    mysource = get_articles(source_id)
     title = f'{source_id} | All Articles'
 
-    return render_template('articles.html', name= source_id, title = title)
+    return render_template('articles.html', name= mysource, title = title)

@@ -1,22 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
 
+{{ super() }}
+<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+
 <div class ="containner-fluid">
     <div class="row">
         <div class ="col-md-12 heading">
-            <h2>{{name}}</h2>
 
         </div>
 
     </div>
 
     <div class = "row">
-        {% for article in news %}
+        {% for article in name %}
         <div class ="col-sm-6">
             <h4> {{article.title}} </h4>
-            <span class="text-muted date-author">{{article.publishedAt}}</span>
+            <p class="text-muted date-author">{{article.publishedAt}}</p>
             <img src ={{article.urlToImage}}>
-            <button type="button" class="btn btn-primary btn-sm"><a href ={{article.url}} target="_blank"></a>Continue Reading</button>
+            <a href ={{article.url}} target="_blank"><button type="button" class="btn btn-primary btn-sm">Continue Reading</button></a>
+            
         </div>
         {% endfor %}
 

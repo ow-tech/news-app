@@ -36,6 +36,7 @@ def get_sources(category):
     """
 
     get_source_url = base_url.format(category, api_key)
+    print(get_source_url)
 
     with urllib.request.urlopen(get_source_url) as url:
         get_source_data = url.read()
@@ -69,17 +70,18 @@ def process_results(source_list):
         url = source_item.get('url')
         description = source_item.get('description')
         name = source_item.get('name')
+        source_id = source_item.get('id')
 
 
         if url:
-            source_object = Source(name, category, country, language, description, url)
+            source_object = Source(name, category, country, language, description, url, source_id)
             source_results. append(source_object)
 
     return source_results
 
 
-def get_articles(source_id, limit):
-    get_article_location_url = articles_url.format(source_id, limit, api_key)
+def get_articles(source_id):
+    get_article_location_url = articles_url.format(source_id, api_key)
 
     with urllib.request.urlopen(get_article_location_url) as url:
         get_article_data = url.read()
@@ -98,14 +100,15 @@ def process_articles(obtained_articles):
     article_location_list = []
 
     for article in obtained_articles:
-        author: article.get('author')
+        author = article.get('author')
         title = article.get('title')
         description = article.get('description')
         url = article.get('url')
         urlToImage = article.get('urlToImage')
+        id = article.get('source.id')
 
         if urlToImage:
-            article_source_object = Articles(author, title, description, url, urlToImage)
+            article_source_object = Articles(author, title, description, url, urlToImage,id)
             article_location_list.append(article_source_object)
 
     return article_location_list
